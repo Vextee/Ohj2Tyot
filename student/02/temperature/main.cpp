@@ -9,13 +9,13 @@ int main()
     cin >> temp;
 
     double fahrenheit = temp * 1.8 + 32;
-    double celcius = (temp-32)/1.8;
+    double celsius = (temp-32)/1.8;
 
-    cout << temp << " degrees Celcius is " << fahrenheit
+    cout << temp << " degrees Celsius is " << fahrenheit
          << " degrees Fahrenheit" << endl;
 
-    cout << temp << " degrees Fahrenheit is " << celcius
-         << " degrees Celcius" << endl;
+    cout << temp << " degrees Fahrenheit is " << celsius
+         << " degrees Celsius" << endl;
 
 
 
