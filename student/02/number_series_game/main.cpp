@@ -8,7 +8,13 @@ int main()
     std::cin >> numbers;
 
     for ( int luku = 1; luku <= 10; ++luku) {
-        std::cout << luku << std::endl;
+        if (luku % 3 == 0) {
+            std::cout << "zip" << std::endl;
+        }
+        else {
+            std::cout << luku << std::endl;
+        }
+
         }
     }
 
