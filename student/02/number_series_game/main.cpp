@@ -7,8 +7,14 @@ int main()
     int numbers;
     std::cin >> numbers;
 
-    for ( int luku = 1; luku <= 10; ++luku) {
-        if (luku % 3 == 0) {
+    for ( int luku = 1; luku <= numbers; ++luku) {
+        if (luku % 3 == 0 && luku % 7 == 0) {
+            std::cout << "zip boing" << std::endl;
+        }
+        else if ( luku % 7 == 0) {
+            std::cout << "boing" << std::endl;
+        }
+        else if (luku % 3 == 0) {
             std::cout << "zip" << std::endl;
         }
         else {
