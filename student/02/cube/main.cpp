@@ -14,7 +14,7 @@ int main()
         std::cout << "Error! The cube of " << number << " is not " << cube << endl;
     }
     else {
-        std:cout << "The cube of " << number << " is " << cube << "." << endl;
+        std::cout << "The cube of " << number << " is " << cube << "." << endl;
     }
 
     return 0;
