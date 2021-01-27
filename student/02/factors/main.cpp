@@ -13,7 +13,7 @@ int main()
 
     if (luku <= 0) {
         std::cout << "Only positive numbers accepted" << std::endl;
-        return EXIT_FAILURE;
+        return EXIT_SUCCESS;
     }
 
     int factor1 = 0;
