@@ -7,6 +7,23 @@ using namespace std;
 void produce_random_numbers(unsigned int lower, unsigned int upper)
 {
     // Implement your function here
+    unsigned int seed;
+    cout << "Enter a seed value: ";
+    cin >> seed;
+
+    default_random_engine gen(seed);
+    uniform_int_distribution<int> distr(lower, upper);
+
+    char command = 'c';
+    while (command != 'q') {
+        cout << endl;
+
+
+
+        cout << "Your drawn number is " << distr(gen) << endl;
+        cout << "Press c to continue or q to quit: ";
+        cin >> command;
+    }
 }
 
 int main()
@@ -25,6 +42,9 @@ int main()
     }
 
     produce_random_numbers(lower_bound, upper_bound);
+
+
+
 
     return EXIT_SUCCESS;
 }
