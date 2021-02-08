@@ -54,11 +54,11 @@ int main()
     credit_card_account.take_money(100);
     print_three_accounts(current_account, savings_account, credit_card_account);
 
-    cout << "6: Transferring money succesfully: " << endl;
+    cout << "6: Transferring money succesfully:" << endl;
     savings_account.transfer_to(credit_card_account, 50);
     print_three_accounts(current_account, savings_account, credit_card_account);
 
-    cout << "7: Transferring money unsuccesfully: " << endl;
+    cout << "7: Transferring money unsuccesfully:" << endl;
     savings_account.transfer_to(current_account, 200);
     print_three_accounts(current_account, savings_account, credit_card_account);
 

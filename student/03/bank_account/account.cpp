@@ -40,6 +40,10 @@ void Account::print() const
      {
          credit_limit_ = limit;
      }
+     else
+     {
+         std::cout << "Cannot set credit limit: the account has no credit card" << std::endl;
+     }
  }
 
  void Account::save_money(int amount)
