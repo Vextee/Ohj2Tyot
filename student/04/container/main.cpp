@@ -111,13 +111,23 @@ bool is_geometric_series(const std::vector<int>& integers)
     std::vector<int>::size_type elem1_index = 0;
     std::vector<int>::size_type elem2_index = 1;
 
-    int ratio = integers.at(1) / integers.at(0);
+    if (integers.at(elem1_index == 0))
+    {
+        return false;
+    }
+
+    int ratio = integers.at(elem2_index) / integers.at(elem1_index);
     int rem = integers.at(1) % integers.at(0);
 
     while (elem2_index < integers.size())
     {
         int elem1 = integers.at(elem1_index);
         int elem2 = integers.at(elem2_index);
+
+        if (elem1 == 0)
+        {
+            return false;
+        }
 
         int new_ratio = elem2 / elem1;
         int new_rem = elem2 % elem1;
