@@ -111,7 +111,7 @@ bool is_geometric_series(const std::vector<int>& integers)
     std::vector<int>::size_type elem1_index = 0;
     std::vector<int>::size_type elem2_index = 1;
 
-    if (integers.at(elem1_index == 0))
+    if (integers.at(elem1_index) == 0)
     {
         return false;
     }
