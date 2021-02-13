@@ -8,9 +8,6 @@
 #include "player.hh"
 #include<iostream>
 
-// Lisää luokan toteutus tähän.
-// Kuhunkin julkiseen metodiin pitäisi riittää 1-2 koodiriviä.
-
 
 Player::Player(const std::string &name):
 name_(name), numb_of_pairs_(0)

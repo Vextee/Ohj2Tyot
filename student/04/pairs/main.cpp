@@ -56,11 +56,6 @@ using Game_board_type = vector<vector<Card>>;
 // (kutsumalla stoi-funktiota).
 // Jos annettu merkkijono ei ole numeerinen, palauttaa nollan
 // (mikä johtaa laittomaan korttiin myöhemmin).
-//
-// Converts the given numeric string to the corresponding integer
-// (by calling stoi).
-// If the given string is not numeric, returns 0
-// (which leads to an invalid card later).
 unsigned int stoi_with_check(const string& str)
 {
     bool is_numeric = true;
@@ -83,8 +78,6 @@ unsigned int stoi_with_check(const string& str)
 }
 
 // Täyttää pelilaudan (kooltaan rows * columns) tyhjillä korteilla.
-//
-// Fills the game board, the size of which is rows * columns, with empty cards.
 void init_with_empties(Game_board_type& g_board, unsigned int rows, unsigned int columns)
 {
     g_board.clear();
@@ -103,21 +96,13 @@ void init_with_empties(Game_board_type& g_board, unsigned int rows, unsigned int
 // Etsii seuraavan tyhjän kohdan pelilaudalta (g_board) aloittamalla
 // annetusta kohdasta start ja jatkamalla tarvittaessa alusta.
 // (Kutsutaan vain funktiosta init_with_cards.)
-//
-// Finds the next free position in the game board (g_board), starting from the
-// given position start and continuing from the beginning if needed.
-// (Called only by the function init_with_cards.)
 unsigned int next_free(Game_board_type& g_board, unsigned int start)
 {
     // Selvitetään annetun pelilaudan rivien ja sarakkeiden määrät
-    //
-    // Finding out the number of rows and columns of the game board
     unsigned int rows = g_board.size();
     unsigned int columns = g_board.at(0).size();
 
     // Aloitetaan annetusta arvosta
-    //
-    // Starting from the given value
     for(unsigned int i = start; i < rows * columns; ++i)
     {
         if(g_board.at(i / columns).at(i % columns).get_visibility() == EMPTY) // vaihdettu
@@ -126,8 +111,6 @@ unsigned int next_free(Game_board_type& g_board, unsigned int start)
         }
     }
     // Jatketaan alusta
-    //
-    // Continuing from the beginning
     for(unsigned int i = 0; i < start; ++i)
     {
         if(g_board.at(i / columns).at(i % columns).get_visibility() == EMPTY)
@@ -136,45 +119,29 @@ unsigned int next_free(Game_board_type& g_board, unsigned int start)
         }
     }
     // Tänne ei pitäisi koskaan päätyä
-    //
-    // You should never reach this
     std::cout << "No more empty spaces" << std::endl;
     return rows * columns - 1;
 }
 
 // Alustaa annetun pelilaudan (g_board) satunnaisesti arvotuilla korteilla
 // annetun siemenarvon (seed) perusteella.
-//
-// Initializes the given game board (g_board) with randomly generated cards,
-// based on the given seed value.
 void init_with_cards(Game_board_type& g_board, int seed)
 {
     // Selvitetään annetun pelilaudan rivien ja sarakkeiden määrät
-    //
-    // Finding out the number of rows and columns of the game board
     unsigned int rows = g_board.size();
     unsigned int columns = g_board.at(0).size();
 
     // Arvotaan täytettävä sijainti
-    //
-    // Drawing a cell to be filled
     std::default_random_engine randomEng(seed);
     std::uniform_int_distribution<int> distr(0, rows * columns - 1);
     // Hylätään ensimmäinen satunnaisluku (joka on aina jakauman alaraja)
-    //
-    // Wiping out the first random number (that is always the lower bound of the distribution)
     distr(randomEng);
 
     // Jos arvotussa sijainnissa on jo kortti, valitaan siitä seuraava tyhjä paikka.
     // (Seuraava tyhjä paikka haetaan kierteisesti funktion next_free avulla.)
-    //
-    // If the drawn cell is already filled with a card, next empty cell will be used.
-    // (The next empty cell is searched for circularly, see function next_free.)
     for(unsigned int i = 0, c = 'A'; i < rows * columns - 1; i += 2, ++c)
     {
         // Lisätään kaksi samaa korttia (parit) pelilaudalle
-        //
-        // Adding two identical cards (pairs) in the game board
         for(unsigned int j = 0; j < 2; ++j)
         {
             unsigned int cell = distr(randomEng);
@@ -188,10 +155,6 @@ void init_with_cards(Game_board_type& g_board, int seed)
 // Tulostaa annetusta merkistä c koostuvan rivin,
 // jonka pituus annetaan parametrissa line_length.
 // (Kutsutaan vain funktiosta print.)
-//
-// Prints a line consisting of the given character c.
-// The length of the line is given in the parameter line_length.
-// (Called only by the function print.)
 void print_line_with_char(char c, unsigned int line_length)
 {
     for(unsigned int i = 0; i < line_length * 2 + 7; ++i)
@@ -202,13 +165,9 @@ void print_line_with_char(char c, unsigned int line_length)
 }
 
 // Tulostaa vaihtelevankokoisen pelilaudan reunuksineen.
-//
-// Prints a variable-length game board with borders.
 void print(const Game_board_type& g_board)
 {
     // Selvitetään annetun pelilaudan rivien ja sarakkeiden määrät
-    //
-    // Finding out the number of rows and columns of the game board
     unsigned int rows = g_board.size();
     unsigned int columns = g_board.at(0).size();
 
@@ -235,9 +194,6 @@ void print(const Game_board_type& g_board)
 
 // Kysyy käyttäjältä tulon ja sellaiset tulon tekijät, jotka ovat
 // mahdollisimman lähellä toisiaan.
-//
-// Asks the desired product from the user, and calculates the factors of
-// the product such that the factor as near to each other as possible.
 void ask_product_and_calculate_factors(unsigned int& smaller_factor, unsigned int& bigger_factor)
 {
     unsigned int product = 0;
@@ -260,8 +216,28 @@ void ask_product_and_calculate_factors(unsigned int& smaller_factor, unsigned in
 }
 
 // Lisää funktioita
-// More functions
+std::vector<Player> ask_number_and_names_of_players()
+{
+    std::vector<Player> pelaajat;
+    unsigned int maara = 0;
+    std::string maara_str = "";
+    std::string nimi = "";
 
+    std::cout << INPUT_AMOUNT_OF_PLAYERS;
+    std::cin >> maara_str;
+    maara = stoi_with_check(maara_str);
+
+    std::cout << "List " << maara << " players: ";
+
+    for (unsigned int i = 0; i < maara; ++i)
+    {
+        std::cin >> nimi;
+        Player pelaaja(nimi);
+        pelaajat.push_back(pelaaja);
+    }
+
+    return pelaajat;
+}
 
 int main()
 {
@@ -278,8 +254,12 @@ int main()
     int seed = stoi_with_check(seed_str);
     init_with_cards(game_board, seed);
 
-    // Lisää koodia
-    // More code
+    vector<Player> pelaajat = ask_number_and_names_of_players();
+
+    std::cout << pelaajat.at(0).get_name() << std::endl;
+    std::cout << pelaajat.at(1).get_name() << std::endl;
+    std::cout << pelaajat.at(2).get_name() << std::endl;
+
     print(game_board);
 
     return EXIT_SUCCESS;

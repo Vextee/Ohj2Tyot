@@ -11,13 +11,6 @@
  *
  * COMP.CS.110 K2021
  * */
-//
-/* Class: Player
- * -------------
- * Represents a single player in pairs (memory) game.
- *
- * COMP.CS.110 K2021
- * */
 
 #ifndef PLAYER_HH
 #define PLAYER_HH
