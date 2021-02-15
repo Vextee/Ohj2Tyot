@@ -293,7 +293,7 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
         koordinaatti = "";
         koordinaatit_int.clear();
 
-        std::cout << pelaaja.get_name() << " " << INPUT_CARDS;
+        std::cout << pelaaja.get_name() << ": " << INPUT_CARDS;
         std::cin >> koordinaatti;
         if (koordinaatti == "q")
         {
@@ -344,6 +344,19 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
         }
         else
         {
+            g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).turn();
+            g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).turn();
+            print(g_board);
+            if(g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).get_letter() == g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).get_letter())
+            {
+                g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).set_visibility(EMPTY);
+                g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).set_visibility(EMPTY);
+            }
+            else
+            {
+                g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).turn();
+                g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).turn();
+            }
             return false;
         }
     }
