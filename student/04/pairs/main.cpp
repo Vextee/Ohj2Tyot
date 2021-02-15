@@ -217,7 +217,7 @@ void ask_product_and_calculate_factors(unsigned int& smaller_factor, unsigned in
 }
 
 // Lisää funktioita
-std::vector<Player> ask_number_and_names_of_players(unsigned int& maara)
+std::vector<Player> ask_number_and_names_of_players(int& maara)
 {
     std::vector<Player> pelaajat;
     std::string maara_str = "";
@@ -234,7 +234,7 @@ std::vector<Player> ask_number_and_names_of_players(unsigned int& maara)
 
         std::cout << "List " << maara << " players: ";
 
-        for (unsigned int i = 0; i < maara; ++i)
+        for (int i = 0; i < maara; ++i)
         {
             std::cin >> nimi;
             Player pelaaja(nimi);
@@ -278,12 +278,11 @@ std::vector<std::string> split(const std::string& line, char sep, bool empty = f
     return parts;
 }
 
-bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_board)
+std::string ask_coordinates(Player &pelaaja, int Y_MAX, int X_MAX, Game_board_type& g_board)
 {
 
 
     std::vector<int> koordinaatit_int;
-    std::cout << X_MAX << Y_MAX << std::endl;
     std::string koordinaatti;
 
     while(true)
@@ -298,7 +297,7 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
         if (koordinaatti == "q")
         {
             std::cout << GIVING_UP << std::endl;
-            return true;
+            return GIVING_UP;
         }
         koordinaatit_int.push_back(stoi_with_check(koordinaatti)-1);
         cin >> koordinaatti;
@@ -326,7 +325,7 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
         {
             std::cout << INVALID_CARD << std::endl;
         }
-        else if (koordinaatit_int.at(0) > X_MAX or koordinaatit_int.at(1) > Y_MAX
+        else if (koordinaatit_int.at(0) > Y_MAX or koordinaatit_int.at(1) > Y_MAX
             or koordinaatit_int.at(2) > X_MAX
             or koordinaatit_int.at(3) > Y_MAX)
         {
@@ -349,22 +348,72 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
             print(g_board);
             if(g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).get_letter() == g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).get_letter())
             {
-                g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).set_visibility(EMPTY);
-                g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).set_visibility(EMPTY);
+                pelaaja.add_card(g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)));
+                g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).remove_from_game_board();
+                return FOUND;
             }
             else
             {
                 g_board.at(koordinaatit_int.at(1)).at(koordinaatit_int.at(0)).turn();
                 g_board.at(koordinaatit_int.at(3)).at(koordinaatit_int.at(2)).turn();
             }
-            return false;
+            return NOT_FOUND;
         }
     }
 
 
 }
 
+bool has_ended(Game_board_type& g_board)
+{
+    int rivit = g_board.size();
+    int pystyrivit = g_board.at(0).size();
 
+    for (int i = 0; i < rivit; i++)
+    {
+        for (int j = 0; j < pystyrivit; j++)
+        {
+            if(g_board.at(i).at(j).get_visibility() == HIDDEN
+               or g_board.at(i).at(j).get_visibility() == OPEN)
+            {
+                return false;
+            }
+        }
+    }
+    return  true;
+
+}
+
+void print_who_won(std::vector<Player> pelaajat, Game_board_type& g_board)
+{
+    unsigned int eniten_pareja = 0;
+    std::vector<Player> voittajat;
+    for(Player p : pelaajat)
+    {
+        if (p.number_of_pairs() > eniten_pareja)
+        {
+            eniten_pareja = p.number_of_pairs();
+        }
+    }
+    for(Player p : pelaajat)
+    {
+        if(p.number_of_pairs() == eniten_pareja)
+        {
+            voittajat.push_back(p);
+        }
+    }
+    unsigned int voittajia = voittajat.size();
+
+    if (voittajia > 1)
+    {
+        std::cout << "Tie of " << voittajia << " players with " << eniten_pareja << " pairs." << std::endl;
+    }
+    else
+    {
+        std::cout << voittajat.at(0).get_name() << " has won with " << eniten_pareja << " pairs." << std::endl;
+    }
+
+}
 
 
 
@@ -372,7 +421,7 @@ int main()
 {
     Game_board_type game_board;
 
-    unsigned int maara = 0;
+    int maara = 0;
     unsigned int factor1 = 1;
     unsigned int factor2 = 1;
     ask_product_and_calculate_factors(factor1, factor2);
@@ -392,17 +441,53 @@ int main()
     print(game_board);
 
     bool on_loppu = false;
+    unsigned int Y_MAX = factor1;
+    unsigned int X_MAX = factor2;
 
     while(true)
     {
-        for(unsigned int vuoro = 0; vuoro < maara; vuoro++)
+        for(int vuoro = 0; vuoro < maara; vuoro++)
         {
-            if (ask_coordinates(pelaajat.at(vuoro), (factor1), (factor2), game_board))
+            std::string tarkistus = ask_coordinates(pelaajat.at(vuoro), (Y_MAX), (X_MAX), game_board);
+            if (tarkistus == GIVING_UP)
             {
                 on_loppu = true;
                 break;
             }
+            else if(tarkistus == FOUND)
+            {
+                std::cout << FOUND << std::endl;
+                for(Player p : pelaajat)
+                {
+                    std::cout << "*** " << p.get_name() << " has " << p.number_of_pairs() << " pairs(s)." << std::endl;
+                }
+                if (vuoro > 0)
+                {
+                   vuoro -= 1;
+                }
+                else
+                {
+                    vuoro = 2;
+                }
+
+            }
+            else if(tarkistus == NOT_FOUND)
+            {
+                std::cout << NOT_FOUND << std::endl;
+                for(Player p : pelaajat)
+                {
+                    std::cout << "*** " << p.get_name() << " has " << p.number_of_pairs() << " pairs(s)." << std::endl;
+                }
+            }
             print(game_board);
+            if(has_ended(game_board))
+            {
+                std::cout << GAME_OVER << std::endl;
+                print_who_won(pelaajat, game_board);
+                on_loppu = true;
+                break;
+            }
+
         }
         if (on_loppu)
         {
