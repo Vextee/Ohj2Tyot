@@ -293,7 +293,7 @@ bool ask_coordinates(Player pelaaja, int X_MAX, int Y_MAX, Game_board_type& g_bo
         koordinaatti = "";
         koordinaatit_int.clear();
 
-        std::cout << pelaaja.get_name() << " " << INPUT_CARDS;
+        std::cout << pelaaja.get_name() << ": " << INPUT_CARDS;
         std::cin >> koordinaatti;
         if (koordinaatti == "q")
         {
