@@ -454,7 +454,7 @@ int main()
     // Täytetään pelilauta satunnaisesti asetetuilla korteilla
     init_with_cards(game_board, seed);
 
-    // Kysytään pelaajien määrää ja nimiet ja tallennetaan nimet pelaajat vektoriin
+    // Kysytään pelaajien määrää ja nimiä ja tallennetaan nimet pelaajat vektoriin
     vector<Player> pelaajat = ask_number_and_names_of_players(maara);
 
     // Tulostetaan pelilauta
@@ -491,7 +491,7 @@ int main()
                 }
                 else
                 {
-                    vuoro = 2;
+                    vuoro = maara-1;
                 }
 
             }
