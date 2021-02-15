@@ -3,9 +3,8 @@
  * Opiskelijanumero: 050149539
  * Kayttajatunnus: scvesv
  * E-Mail: veikko.svanstrom@tuni.fi
- */
-
-/* Luokka: Player
+ *
+ * Luokka: Player
  * --------------
  * Kuvaa yhtä pelaajaa muistipelissä.
  *
