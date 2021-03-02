@@ -9,8 +9,6 @@ bool palindrome_recursive(std::string s)
   RECURSIVE_FUNC
   // Do not remove RECURSIVE_FUNC declaration, it's necessary for automatic testing to work
   // ------------
-  std::cout<< s << std::endl;
-  std::cout << s.substr(1, s.length()-2) << std::endl;
 
   if(s.length() <= 2)
   {
@@ -43,7 +41,6 @@ int main()
     std::cout << "Enter a word: ";
     std::string word;
     std::cin >> word;
-    std::cout << word.substr(1, 1) << std::endl;
 
     if(palindrome_recursive(word)){
         std::cout << word << " is a palindrome" << std::endl;
