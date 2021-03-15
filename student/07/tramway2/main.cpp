@@ -139,18 +139,38 @@ bool interface(std::string file_name)
     std::ifstream file(file_name);
     std::string line;
 
-    /*while (getline(file, line))
+    while (getline(file, line))
     {
         std::vector<std::string> parts = split(line, ';');
-        if(parts.at(2) == "")
-        {
-            parts.at(2) = "0";
-        }
-        if (tramlines.find(parts.at(0)) != tramlines.end())
-        {
 
+
+        if(parts.size() < 3)
+        {
+            parts.push_back("0.0");
         }
-    }*/
+        else if(parts.at(2) == "")
+        {
+            parts.at(2) = "0.0";
+        }
+
+        double distance = stod(parts.at(2));
+        std::pair<std::string, double> stop_and_dis = {parts.at(1), distance};
+
+        if (tramlines.find(parts.at(0)) == tramlines.end())
+        {
+            tramlines[parts.at(0)] = {};
+        }
+
+        for (std::pair<std::string, double> stops : tramlines.at(parts.at(0)))
+        {
+            if (stops.first == parts.at(1) or stops.second == distance)
+            {
+                std::cout << "Error: Stop/line already exists." << std::endl;
+                return false;
+            }
+        }
+        tramlines[parts.at(0)].insert(stop_and_dis);
+    }
 
 
     while(true)
@@ -253,7 +273,7 @@ bool interface(std::string file_name)
         }
         else
         {
-            std::cout << "Error: Invalid input.1" << std::endl;
+            std::cout << "Error: Invalid input." << std::endl;
         }
     }
     return true;
