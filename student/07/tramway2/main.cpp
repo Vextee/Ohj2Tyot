@@ -585,12 +585,26 @@ bool interface(std::string file_name)
 
         // Jaetaan komento osiin
         std::vector<std::string> command_parts = split(full_command, ' ');
-        /*if (command_parts.size() == 0)
+
+        // Jos komennoksi ei annettu mitään,
+        // siirrytään uudelle silmukan kierrokselle
+        if (command_parts.size() == 0)
         {
             continue;
-        }*/
+        }
+
+        // Ensimmäinen osa syötteestä on itse komento
         std::string command = command_parts.at(0);
 
+        // Tarkistetaan mikä komento oli.
+        // Jos komento on QUIT ohjelman suoritus lopetetaan.
+        // Muuten arkistetaan komentojen kohdalla erikseen
+        // oliko komennolla tarpeeksi parameterjä.
+        // Jos oli liian vähän parametrejä
+        // tulostettaan virheilmoitus
+        // ja jatketaan silmukkaa.
+        // Jokaisella komennolla kutsutaan omaa funktiota,
+        // joka toteuttaa komennon toiminnon
         if (same_command("QUIT", command))
         {
             break;
@@ -681,9 +695,12 @@ bool interface(std::string file_name)
                 remove_stop(tramlines, stop);
             }
         }
+
+        // Jos komento ei ollut mikään määritellyistä
+        // tulostettaan virheilmoitus
         else
         {
-            std::cout << "Error: Invalid input.1" << std::endl;
+            std::cout << "Error: Invalid input." << std::endl;
         }
     }
     return true;
@@ -692,9 +709,16 @@ bool interface(std::string file_name)
 // Lyhyt ja ytimekäs main.
 int main()
 {
+
+    // Tulostetaan RASSE
     print_rasse();
+
+    // Pyydetään tiedoston nimeö
     std::string file_name = read_file_name();
 
+    // Tarkistetaan tiedoston datan oikeellisuus
+    // ja sen mukaan palautetaan joko
+    // EXIT_SUCCESS tai EXIT_FAILURe
     if (check_data(file_name))
     {
         if (interface(file_name))
