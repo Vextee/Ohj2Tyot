@@ -465,6 +465,7 @@ void add_line(Tramlines& tramlines, const std::string& line)
     // Linjalle ei siis vielä anneta
     // pysäkkejä ja etäisyyksiä
     tramlines[line] = {};
+    std::cout << "Line was added." << std::endl;
 
     return;
 }
