@@ -76,7 +76,7 @@ bool write_data(const std::string& file_name,
                     << s->name << ";"
                     << s-> phone_number << ";"
                     << s->email << ";"
-                    << s-> skype << ";"
+                    << s-> skype
                     << std::endl;
     }
     file_object.close();
