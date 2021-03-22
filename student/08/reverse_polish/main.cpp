@@ -34,6 +34,7 @@ int main()
     {
         std::string s = "";
         s += c;
+        std::cout << iterator << " " << s << std::endl;
         if (c == ' ')
         {
             continue;
@@ -69,11 +70,14 @@ int main()
                 failed = true;
                 break;
             }
-            int product = first / second;
-            stack[current_amount-2] = product;
-            stack[current_amount-2] = 0;
-            ++total_operations;
-            --current_amount;
+            else {
+                int product = first / second;
+                stack[current_amount-2] = product;
+                stack[current_amount-1] = 0;
+                ++total_operations;
+                --current_amount;
+            }
+
         }
         else if (c == '+')
         {
@@ -89,7 +93,7 @@ int main()
         {
             int first = stack[current_amount-2];
             int second = stack[current_amount-1];
-            int product = first + second;
+            int product = first - second;
             stack[current_amount-2] = product;
             stack[current_amount-1] = 0;
             ++total_operations;
@@ -113,13 +117,15 @@ int main()
 
     if (!failed)
     {
-        if (stack[1] != 0)
+        if (total_operations != total_operands - 1)
         {
             std::cout << "Error: Too few operators" << std::endl;
+            return EXIT_FAILURE;
         }
         else if (total_operands <= total_operations)
         {
             std::cout << "Error: Too few operands" << std::endl;
+            return EXIT_FAILURE;
         }
         else {
             std::cout << "Correct: " << stack[0] << " is the result" << std::endl;
