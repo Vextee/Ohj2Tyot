@@ -116,14 +116,14 @@ int main()
 
     if (!failed)
     {
-        if (total_operations != total_operands - 1)
-        {
-            std::cout << "Error: Too few operators" << std::endl;
-            return EXIT_FAILURE;
-        }
-        else if (total_operands <= total_operations)
+        if (total_operands <= total_operations)
         {
             std::cout << "Error: Too few operands" << std::endl;
+            return EXIT_FAILURE;
+        }
+        else if (total_operations != total_operands - 1)
+        {
+            std::cout << "Error: Too few operators" << std::endl;
             return EXIT_FAILURE;
         }
         else {
