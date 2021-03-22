@@ -34,7 +34,6 @@ int main()
     {
         std::string s = "";
         s += c;
-        std::cout << iterator << " " << s << std::endl;
         if (c == ' ')
         {
             continue;
