@@ -76,7 +76,6 @@ bool Cards::bottom_to_top()
     Card_data* old_bottom = bottom_;
     Card_data* new_bottom = get_card(size_ - 2);
 
-    assert(old_bottom->next == nullptr);
     old_bottom->next = old_top;
     top_ = old_bottom;
     bottom_ = new_bottom;
@@ -107,7 +106,7 @@ bool Cards::top_to_bottom()
 
 void Cards::print_from_bottom_to_top(std::ostream &s)
 {
-
+    s;
 }
 
 Cards::~Cards()
@@ -123,19 +122,11 @@ Cards::~Cards()
 
 Cards::Card_data *Cards::get_card(size_t index)
 {
-    assert(size_ >= 2);
-    assert(index < size_);
+
     Card_data* current = top_;
     for (size_t i = 0; i < index; i++)
     {
         current = current->next;
-    }
-
-    return current;
-
-    while (current->next != nullptr)
-    {
-        Card_data* tmp = current->next;
     }
 
     return current;
