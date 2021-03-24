@@ -40,8 +40,9 @@ class Cards {
 
     private:
       struct Card_data {
-        int data;
-        Card_data* next;
+        int data = -1;
+        Card_data* prev = nullptr;
+        Card_data* next = nullptr;
       };
 
       int size_;
