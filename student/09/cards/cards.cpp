@@ -1,7 +1,5 @@
 #include "cards.hh"
 
-#include <cassert>
-
 // TODO: Implement the methods here
 
 Cards::Cards() :
@@ -96,13 +94,6 @@ bool Cards::bottom_to_top()
 
     top_ = old_bottom;
 
-    /*Card_data* new_bottom = get_card(size_ - 2);
-
-    old_bottom->next = old_top;
-    top_ = old_bottom;
-    bottom_ = new_bottom;
-    new_bottom->next = nullptr;*/
-
     return true;
 }
 
@@ -150,16 +141,4 @@ Cards::~Cards()
         delete current;
         current = tmp;
     }
-}
-
-Cards::Card_data *Cards::get_card(size_t index)
-{
-
-    Card_data* current = top_;
-    for (size_t i = 0; i < index; i++)
-    {
-        current = current->next;
-    }
-
-    return current;
 }
