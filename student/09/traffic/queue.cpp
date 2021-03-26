@@ -16,12 +16,10 @@ Queue::Queue(unsigned int cycle):
 
 Queue::~Queue()
 {
-    Vehicle* current = last_;
-    while (current != nullptr)
+
+    while (size_ != 0)
     {
-        Vehicle* tmp = current->next;
-        delete current;
-        current = tmp;
+        remove();
     }
 }
 
@@ -142,6 +140,33 @@ void Queue::dequeue()
 
     Vehicle* old_first = first_;
     std::cout << " " << old_first->reg_num;
+    Vehicle* new_first = old_first->prev;
+
+    if (first_ == last_)
+    {
+        last_ = nullptr;
+        delete old_first;
+        first_ = new_first;
+    }
+    else
+    {
+        delete old_first;
+        first_ = new_first;
+    }
+
+    --size_;
+    return;
+
+}
+
+void Queue::remove()
+{
+    if (first_ == nullptr)
+    {
+        return;
+    }
+
+    Vehicle* old_first = first_;
     Vehicle* new_first = old_first->prev;
 
     if (first_ == last_)

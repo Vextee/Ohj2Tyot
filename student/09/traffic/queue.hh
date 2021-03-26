@@ -64,6 +64,8 @@ private:
 
     void dequeue();
 
+    void remove();
+
 };
 
 #endif // QUEUE_HH
