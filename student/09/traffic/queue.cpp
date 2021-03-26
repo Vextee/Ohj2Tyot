@@ -51,7 +51,7 @@ void Queue::enqueue(string reg)
     }
     else
     {
-        std::cout << light_status_ << ": The vehicle " << reg << "  need not stop to wait" << std::endl;
+        std::cout << light_status_ << ": The vehicle " << reg << " need not stop to wait" << std::endl;
     }
 
 }
