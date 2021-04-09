@@ -32,6 +32,7 @@ bool Cards::remove(int &id)
     }
     id = top_->data;
     top_ = top_->next;
+    return true;
 }
 
 void Cards::reverse()
