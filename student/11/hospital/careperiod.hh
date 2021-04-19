@@ -32,6 +32,12 @@ public:
 
     void add_staff(const std::string staff_member);
 
+    std::string get_patient();
+
+    std::vector<std::string> get_staff();
+
+
+
 private:
     Person* patient_;
     Date start_;

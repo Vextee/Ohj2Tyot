@@ -116,6 +116,7 @@ private:
     std::map<std::string, Person*> all_patients_;
     std::vector<CarePeriod*> all_care_periods_;
     std::map<std::string, CarePeriod*> active_care_periods_;
+    std::vector<std::string> all_medicine_;
 };
 
 #endif // HOSPITAL_HH

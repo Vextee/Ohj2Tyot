@@ -17,6 +17,12 @@ CarePeriod::~CarePeriod()
 
 void CarePeriod::print_care_period()
 {
+    start_.print();
+    std::cout << " - ";
+    if (!end_.is_default())
+    {
+        end_.print();
+    }
 
 }
 
@@ -41,3 +47,15 @@ void CarePeriod::add_staff(const std::string staff_member)
     }
 
 }
+
+std::string CarePeriod::get_patient()
+{
+    return patient_->get_id();
+}
+
+std::vector<std::string> CarePeriod::get_staff()
+{
+    return staff_;
+}
+
+
