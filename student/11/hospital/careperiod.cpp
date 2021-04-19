@@ -62,6 +62,7 @@ void CarePeriod::print_staff()
         {
             std::cout << s << " ";
         }
+        std::cout << std::endl;
     }
 }
 

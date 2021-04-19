@@ -181,7 +181,7 @@ void Hospital::print_patient_info(Params params)
             std::cout << std::endl;
             std::cout << "  - Staff: ";
             cp->print_staff();
-            std::cout << std::endl;
+
         }
     }
 
