@@ -146,6 +146,7 @@ void Hospital::add_medicine(Params params)
     }
     patient_iter->second->add_medicine(medicine, stoi(strength), stoi(dosage));
     std::cout << MEDICINE_ADDED << patient << std::endl;
+    all_medicine_.insert(medicine);
 }
 
 void Hospital::remove_medicine(Params params)
@@ -234,7 +235,35 @@ void Hospital::print_care_periods_per_staff(Params params)
 
 void Hospital::print_all_medicines(Params)
 {
+    if(all_medicine_.size() == 0)
+    {
+        std::cout << "None" << std::endl;
+    }
 
+    for (std::string m : all_medicine_)
+    {
+        bool in_use = false;
+        for (auto patient : all_patients_)
+        {
+            std::vector<std::string> medicine = patient.second->get_medicines();
+            if(std::find(medicine.begin(), medicine.end(), m) != medicine.end())
+            {
+                in_use = true;
+            }
+        }
+        if (in_use)
+        {
+           std::cout << m << " prescribed for" << std::endl;
+           for (auto patient : all_patients_)
+           {
+               std::vector<std::string> medicine = patient.second->get_medicines();
+               if(std::find(medicine.begin(), medicine.end(), m) != medicine.end())
+               {
+                   std::cout << "* " << patient.first << std::endl;
+               }
+           }
+        }
+    }
 }
 
 void Hospital::print_all_staff(Params)
@@ -254,6 +283,7 @@ void Hospital::print_all_staff(Params)
 
 void Hospital::print_all_patients(Params)
 {
+
     if (all_patients_.size() == 0)
     {
         std::cout << "None" << std::endl;
@@ -262,38 +292,9 @@ void Hospital::print_all_patients(Params)
     for (auto patient : all_patients_)
     {
         std::cout << patient.first << std::endl;
-        std::string patient_id = patient.second->get_id();
-
-        for (auto cp : all_care_periods_)
-        {
-
-            if (cp->get_patient() == patient_id)
-            {
-                std::cout << "* Care period: ";
-                cp->print_care_period();
-                std::cout << std::endl;
-                std::cout << "  - Staff: ";
-                std::vector<std::string> staff = cp->get_staff();
-                if (staff.size() == 0)
-                {
-                    std::cout << "None" << std::endl;
-                }
-                else
-                {
-                    sort(staff.begin(), staff.end());
-                    for (std::string s : staff)
-                    {
-                        std::cout << s << " ";
-                    }
-                    std::cout << std::endl;
-                }
-
-            }
-        }
-
-        std::cout << "* Medicines:";
-        all_patients_[patient_id]->print_medicines("  - ");
-
+        std::vector<std::string> params;
+        params.push_back(patient.second->get_id());
+        print_patient_info(params);
 
     }
 }
@@ -308,37 +309,9 @@ void Hospital::print_current_patients(Params)
     for (auto patient : current_patients_)
     {
         std::cout << patient.first << std::endl;
-        std::string patient_id = patient.second->get_id();
-
-        for (auto cp : all_care_periods_)
-        {
-            if (cp->get_patient() == patient_id)
-            {
-                std::cout << "* Care period: ";
-                cp->print_care_period();
-                std::cout << std::endl;
-                std::cout << "  - Staff: ";
-                std::vector<std::string> staff = cp->get_staff();
-                if (staff.size() == 0)
-                {
-                    std::cout << "None" << std::endl;
-                }
-                else
-                {
-                    sort(staff.begin(), staff.end());
-                    for (std::string s : staff)
-                    {
-                        std::cout << s << " ";
-                    }
-                    std::cout << std::endl;
-                }
-
-            }
-        }
-
-        std::cout << "* Medicines:";
-        all_patients_[patient_id]->print_medicines("  - ");
-
+        std::vector<std::string> params;
+        params.push_back(patient.second->get_id());
+        print_patient_info(params);
 
     }
 }
