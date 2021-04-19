@@ -4,7 +4,11 @@
  * ----------
  * Class for describing a date.
  *
- * Note: Students need not change this class, but they can if necessary.
+ * Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
  * */
 #ifndef DATE_HH
 #define DATE_HH

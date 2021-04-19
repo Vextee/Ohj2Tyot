@@ -1,3 +1,10 @@
+/* Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
+ */
+
 #include "cli.hh"
 #include "utils.hh"
 #include <fstream>

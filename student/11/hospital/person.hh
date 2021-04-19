@@ -2,11 +2,17 @@
  * ----------
  * COMP.CS.110 SPRING 2021
  * ----------
- * Class for describing a person that can be a patient or a staff member
- * in hospital.
  *
- * Note: Students can change this class, but most probably they need not.
+ * Luokka kuvaa henkilöä, joka voi olla joko potilas tai
+ * sairaalan henkilökunnan jäsen
+ *
+ * Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
  * */
+
 #ifndef PERSON_HH
 #define PERSON_HH
 
@@ -18,51 +24,51 @@
 class Person
 {
 public:
-    // Default constructor.
+    // Oletus konstruktori
     Person();
 
-    // Constructor with an id.
+    // Konstruktori id:n kanssa
     Person(const std::string& id);
 
-    // Constructor with an id and a date of birth (actually useless)
+    // Konstruktori id:n ja syntymäpäivän kanssa
     Person(const std::string& id, const std::string& date_of_birth);
 
-    // Destructor.
+    // Destruktori
     ~Person();
 
-    // Obvious getter methods.
+    // Hakija metodeja
     std::string get_id() const;
     std::vector<std::string> get_medicines() const;
 
-    // Adds a medicine for the person.
+    // Lisää lääkkeen henkilölle
     void add_medicine(const std::string& name,
                       unsigned int strength,
                       unsigned int dosage);
 
-    // Removes medicine from the person.
+    // Poistaa lääkkeen henkilöltä
     void remove_medicine(const std::string& name);
 
-    // Prints person's id.
+    // Tulostaa henkilön id:n
     void print_id() const;
 
-    // Prints person's medicines.
+    // Tulostaa henkilön lääkkeet
     void print_medicines(const std::string& pre_text) const;
 
-    // Comparison operator, enables forming a set of Person objects.
+    // Vertailu operaattori
     bool operator<(const Person& rhs) const;
 
 
 
 private:
-    std::string id_;     // Can be a name or any other identifier
-    Date date_of_birth_; // Not actually needed
+    std::string id_;     // Voi olla nimi tai jokin muu identitaattori
+    Date date_of_birth_; // Date luokkainen olio
 
     struct Prescription
     {
         unsigned int strength_;
         unsigned int dosage_;
     };
-    // Medicine names and their prescriptions
+    // Lääkkeiden nimet ja niiden reseptit
     std::map<std::string, Prescription> medicines_;
 
 };

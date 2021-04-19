@@ -5,7 +5,14 @@
  * Module for different utilities needed in the program.
  *
  * Note: Students shouldn't need to make changes to this module.
+ *
+ * Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
  * */
+
 #ifndef UTILS_HH
 #define UTILS_HH
 

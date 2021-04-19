@@ -1,3 +1,9 @@
+/* Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
+ */
 #include "utils.hh"
 
 std::vector<std::string> utils::split( std::string& str, char delim )

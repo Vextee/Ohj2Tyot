@@ -1,36 +1,48 @@
+/* Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
+ */
 #include "person.hh"
 #include <iostream>
 #include <map>
 
+// Alustaa luokan
 Person::Person()
 {
 }
 
+// Alustaa luokan henkilön id:n kanssa ja asettaa henkilön
+// syntymäpäiväksi nykyisen päivämäärän
 Person::Person(const std::string &id):
     id_(id)
 {
     date_of_birth_ = Date();
 }
 
+// Alustaa luokan henkilön id:n ja syntymäpäivän kanssa
 Person::Person(const std::string& id, const std::string& date_of_birth):
     id_(id), date_of_birth_(date_of_birth)
 {
 }
 
+
 Person::~Person()
 {
-    // Remove the print below before submitting the program in Plussa
-    // std::cout << "Person " << id_ << " destructed." << std::endl;
 }
 
+// Palauttaa henkilön id:n
 std::string Person::get_id() const
 {
     return id_;
 }
 
+// Palauttaa henkilölle määrätyt lääkkeet vectorissa
 std::vector<std::string> Person::get_medicines() const
 {
     std::vector<std::string> result;
+    // Siirretään lääkkeet mapista vectoriin
     for( std::map<std::string, Prescription>::const_iterator
          iter = medicines_.begin();
          iter != medicines_.end();
@@ -41,6 +53,7 @@ std::vector<std::string> Person::get_medicines() const
     return result;
 }
 
+// Lisää henkilölle lääkkeen
 void Person::add_medicine(const std::string& name,
                           unsigned int strength,
                           unsigned int dosage)
@@ -58,26 +71,30 @@ void Person::add_medicine(const std::string& name,
     }
 }
 
+// Poistaa henkilöltä lääkkeen
 void Person::remove_medicine(const std::string& name)
 {
     medicines_.erase(name);
 }
 
+// Tulostaa henkilön id:n
 void Person::print_id() const
 {
     std::cout << id_;
-    //date_of_birth_.print();
-    //std::cout << std::endl;
 }
 
+// Tulostaa henkilölle määrätyt lääkkeet
 void Person::print_medicines(const std::string& pre_text) const
 {
+    // Jos lääkkeitä ei ole yhtään tulostetaan None,
+    // ja poistutaan funktiosta
     if( medicines_.empty() )
     {
         std::cout << " None" << std::endl;
         return;
     }
     std::cout << std::endl;
+    // Käydään kaikki lääkkeet läpi ja tulostetaan niiden tiedot
     for( std::map<std::string, Prescription>::const_iterator
          iter = medicines_.begin();
          iter != medicines_.end();

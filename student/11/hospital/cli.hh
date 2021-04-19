@@ -6,7 +6,11 @@
  * used in hospital program. Implements the exec method that calls an
  * appropriate method based on user-given command through a function pointer.
  *
- * Note: Students shouldn't need to make changes to this class.
+ * Ohjelman kirjoittaja
+ * Nimi: Veikko Svanstrom
+ * Opiskelijanumero: 50149539
+ * Kayttajatunnus: scvesv
+ * E-Mail: veikko.svanstrom@tuni.fi
  * */
 #ifndef CLI_HH
 #define CLI_HH
