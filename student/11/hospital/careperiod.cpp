@@ -1,5 +1,6 @@
 #include "careperiod.hh"
 #include <iostream>
+#include <algorithm>
 
 CarePeriod::CarePeriod(const std::string& start, Person* patient):
     patient_(patient), start_(start)
@@ -46,6 +47,22 @@ void CarePeriod::add_staff(const std::string staff_member)
         staff_.push_back(staff_member);
     }
 
+}
+
+void CarePeriod::print_staff()
+{
+    if (staff_.size() == 0)
+    {
+        std::cout << "None" << std::endl;
+    }
+    else
+    {
+        sort(staff_.begin(), staff_.end());
+        for (std::string s : staff_)
+        {
+            std::cout << s << " ";
+        }
+    }
 }
 
 std::string CarePeriod::get_patient()

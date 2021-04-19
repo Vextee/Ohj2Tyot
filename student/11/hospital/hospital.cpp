@@ -180,21 +180,8 @@ void Hospital::print_patient_info(Params params)
             cp->print_care_period();
             std::cout << std::endl;
             std::cout << "  - Staff: ";
-            std::vector<std::string> staff = cp->get_staff();
-            if (staff.size() == 0)
-            {
-                std::cout << "None" << std::endl;
-            }
-            else
-            {
-                sort(staff.begin(), staff.end());
-                for (std::string s : staff)
-                {
-                    std::cout << s << " ";
-                }
-                std::cout << std::endl;
-            }
-
+            cp->print_staff();
+            std::cout << std::endl;
         }
     }
 

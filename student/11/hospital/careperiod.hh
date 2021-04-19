@@ -32,6 +32,8 @@ public:
 
     void add_staff(const std::string staff_member);
 
+    void print_staff();
+
     std::string get_patient();
 
     std::vector<std::string> get_staff();
