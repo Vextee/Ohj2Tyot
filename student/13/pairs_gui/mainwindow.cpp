@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QGraphicsView>
+#include <QLabel>
 
 
 
@@ -16,8 +18,13 @@ MainWindow::MainWindow(QWidget *parent)
     unsigned int columns = 1;
 
     calculate_factors(rows, columns);
-    //init_cards(rows, columns);
+    init_cards(rows, columns);
     init_game_board(rows, columns);
+    connect(ui->CloseButton, &QPushButton::clicked,
+            this, &MainWindow::handleCloseButtonClick);
+    connect(ui->TurnBackButton, &QPushButton::clicked,
+            this, &MainWindow::handleTurnBackButtonClick);
+
 }
 
 MainWindow::~MainWindow()
@@ -39,7 +46,7 @@ void MainWindow::calculate_factors(unsigned int& smaller_factor, unsigned int& b
 
 void MainWindow::init_cards(const unsigned int& rows, const unsigned int& columns)
 {
-    used_letters_ = letters.substr(0,MAX_CARD_AMOUNT+2);
+    used_letters_ = letters.substr(0,MAX_CARD_AMOUNT);
     random_shuffle(used_letters_.begin(), used_letters_.end());
 
     int counter = 0;
@@ -57,15 +64,32 @@ void MainWindow::init_cards(const unsigned int& rows, const unsigned int& column
 }
 
 
-void MainWindow::handleButtonClick()
+void MainWindow::handleCardClick()
 {
+    close();
+    /*if (turned_cards_ < 2)
+    {
 
+    }*/
+}
+
+void MainWindow::handleCloseButtonClick()
+{
+    close();
+}
+
+void MainWindow::handleTurnBackButtonClick()
+{
+    close();
 }
 
 void MainWindow::init_game_board(const unsigned int& rows, const unsigned int& columns)
 {
-    QWidget* central = new QWidget(this);
-    QGridLayout* grid = new QGridLayout(central);
+
+    QGridLayout* grid = new QGridLayout;
+    grid->setSpacing(20);
+    ui->CardsGraphicsView->setLayout(grid);
+
 
     for (unsigned int r = 0; r < rows; ++r)
     {
@@ -75,11 +99,9 @@ void MainWindow::init_game_board(const unsigned int& rows, const unsigned int& c
             pushButton->setFixedSize(CARD_BUTTON_WIDTH, CARD_BUTTON_HEIGTH);
             grid->addWidget(pushButton,r,c);
             connect(pushButton, &QPushButton::clicked,
-                    this, &MainWindow::handleButtonClick);
+                    this, &MainWindow::handleCardClick);
         }
     }
-    setCentralWidget(central);
 }
-
 
 
