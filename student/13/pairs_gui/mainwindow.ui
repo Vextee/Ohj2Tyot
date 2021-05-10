@@ -50,19 +50,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>560</y>
-      <width>347</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -74,33 +61,59 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="CurrentTurnLabel">
        <property name="text">
         <string>Current turn: P1</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="P1PointsLabel">
        <property name="text">
         <string>Player1: 0</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="graphicsView_2"/>
+      <widget class="QGraphicsView" name="P1CardGraphicsView"/>
      </item>
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="P2PointsLabel">
        <property name="text">
         <string>Player2: 0</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="graphicsView_3"/>
+      <widget class="QGraphicsView" name="P2CardsGraphicsView"/>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="winnerLabel">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>530</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="resetButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>570</y>
+      <width>84</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
