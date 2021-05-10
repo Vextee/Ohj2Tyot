@@ -39,7 +39,10 @@ private:
     std::string used_letters_;
     QGraphicsScene* scene1_;
     QGraphicsScene* scene2_;
+    QGridLayout* grid_ = new QGridLayout();
 
+    unsigned int rows_ = 1;
+    unsigned int columns_ = 1;
     std::string player_in_turn_ = "P1";
     unsigned int turned_cards_ = 0;
     std::vector<QPushButton*> pressed_buttons_;
@@ -47,15 +50,15 @@ private:
     unsigned int p1_points_ = 0;
     unsigned int p2_points_ = 0;
 
-    const unsigned int CARD_AMOUNT = 12;
+    const unsigned int CARD_AMOUNT = 4;
     const std::string letters = "AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP";
 
     const int CARD_BUTTON_WIDTH = 60;
     const int CARD_BUTTON_HEIGTH = 90;
 
     void calculate_factors(unsigned int& smaller_factor, unsigned int& bigger_factor);
-    void init_cards(const unsigned int& rows, const unsigned int& columns);
-    void init_game_board(const unsigned int& rows, const unsigned int& columns);
+    void init_cards(const unsigned int& rows_, const unsigned int& columns_);
+    void init_game_board(const unsigned int& rows_, const unsigned int& columns_);
     void init_graphics_views();
 
 };

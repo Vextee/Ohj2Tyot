@@ -11,13 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    unsigned int rows = 1;
-    unsigned int columns = 1;
 
     ui->resetButton->setVisible(false);
-    calculate_factors(rows, columns);
-    init_cards(rows, columns);
-    init_game_board(rows, columns);
+    grid_->setSpacing(20);
+    ui->CardsGraphicsView->setLayout(grid_);
+
+    calculate_factors(rows_, columns_);
+    init_cards(rows_, columns_);
+    init_game_board(rows_, columns_);
     init_graphics_views();
     connect(ui->CloseButton, &QPushButton::clicked,
             this, &MainWindow::handleCloseButtonClick);
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete grid_;
 }
 
 void MainWindow::calculate_factors(unsigned int& smaller_factor, unsigned int& bigger_factor)
@@ -83,6 +85,8 @@ void MainWindow::handleCloseButtonClick()
 
 void MainWindow::handleTurnBackButtonClick()
 {
+    /*QBrush grayBrush(Qt::gray);
+    QPen blackPen(Qt::black);*/
     if (turned_cards_ == 2)
     {
         if (pressed_buttons_[0]->text() == pressed_buttons_[1]->text())
@@ -95,6 +99,8 @@ void MainWindow::handleTurnBackButtonClick()
                 std::string points_str = std::to_string(p1_points_);
                 QString points_qstr = QString::fromStdString("Player1: " + points_str);
                 ui->P1PointsLabel->setText(points_qstr);
+                /*QGraphicsRectItem* rect;
+                rect = scene1_->addRect(100,0+30*(p1_points_-1),100,10,blackPen,grayBrush);*/
             }
             else
             {
@@ -102,6 +108,8 @@ void MainWindow::handleTurnBackButtonClick()
                 std::string points_str = std::to_string(p2_points_);
                 QString points_qstr = QString::fromStdString("Player2: " + points_str);
                 ui->P2PointsLabel->setText(points_qstr);
+                /*QGraphicsRectItem* rect;
+                rect = scene2_->addRect(100,0+30*(p1_points_-1),100,10,blackPen,grayBrush);*/
             }
         }
         else
@@ -146,15 +154,27 @@ void MainWindow::handleTurnBackButtonClick()
 
 void MainWindow::handeResetButtonClick()
 {
+    for (auto card : game_board_)
+    {
+        game_board_.erase(card.first);
+        delete(card.first);
+    }
+    letters_g_board_.clear();
+    init_cards(rows_, columns_);
+    init_game_board(rows_, columns_);
+    ui->resetButton->setVisible(false);
+    ui->winnerLabel->setText("");
+    ui->P1PointsLabel->setText("Player1: 0");
+    ui->P2PointsLabel->setText("Player2: 0");
+    ui->CurrentTurnLabel->setText("Current turn: P1");
+    p1_points_ = 0;
+    p2_points_ = 0;
+    player_in_turn_ = "P1";
 
 }
 
 void MainWindow::init_game_board(const unsigned int& rows, const unsigned int& columns)
 {
-
-    QGridLayout* grid = new QGridLayout;
-    grid->setSpacing(20);
-    ui->CardsGraphicsView->setLayout(grid);
 
 
     for (unsigned int r = 0; r < rows; ++r)
@@ -168,7 +188,7 @@ void MainWindow::init_game_board(const unsigned int& rows, const unsigned int& c
             QPushButton* pushButton = new QPushButton(this);
             game_board_.insert({pushButton, qstr});
             pushButton->setFixedSize(CARD_BUTTON_WIDTH, CARD_BUTTON_HEIGTH);
-            grid->addWidget(pushButton,r,c);
+            grid_->addWidget(pushButton,r,c);
             connect(pushButton, &QPushButton::clicked,
                     this, &MainWindow::handleCardClick);
         }
