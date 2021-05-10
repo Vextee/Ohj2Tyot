@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="CardsGraphicsView">
+   <widget class="QGraphicsView" name="cardsGraphicsView">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -35,14 +35,14 @@
     </property>
     <layout class="QHBoxLayout" name="ButtonsLayout">
      <item>
-      <widget class="QPushButton" name="CloseButton">
+      <widget class="QPushButton" name="closeButton">
        <property name="text">
         <string>Close</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="TurnBackButton">
+      <widget class="QPushButton" name="turnBackButton">
        <property name="text">
         <string>Turn back</string>
        </property>
@@ -61,31 +61,31 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
      <item>
-      <widget class="QLabel" name="CurrentTurnLabel">
+      <widget class="QLabel" name="currentTurnLabel">
        <property name="text">
         <string>Current turn: P1</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="P1PointsLabel">
+      <widget class="QLabel" name="p1PointsLabel">
        <property name="text">
         <string>Player1: 0</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="P1CardGraphicsView"/>
+      <widget class="QGraphicsView" name="p1CardGraphicsView"/>
      </item>
      <item>
-      <widget class="QLabel" name="P2PointsLabel">
+      <widget class="QLabel" name="p2PointsLabel">
        <property name="text">
         <string>Player2: 0</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="P2CardsGraphicsView"/>
+      <widget class="QGraphicsView" name="p2CardsGraphicsView"/>
      </item>
     </layout>
    </widget>
@@ -119,7 +119,7 @@
     <property name="geometry">
      <rect>
       <x>820</x>
-      <y>520</y>
+      <y>530</y>
       <width>160</width>
       <height>80</height>
      </rect>
@@ -146,6 +146,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>510</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Elapsed time:</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
