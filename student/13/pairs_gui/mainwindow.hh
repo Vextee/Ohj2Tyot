@@ -12,6 +12,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsItem>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,11 +26,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QTimer* timer;
+
 private slots:
     void handleCardClick();
     void handleCloseButtonClick();
     void handleTurnBackButtonClick();
-    void handeResetButtonClick();
+    void handelResetButtonClick();
+    void handleTimerTimeout();
 
 private:
     Ui::MainWindow *ui;
@@ -39,6 +43,10 @@ private:
     std::string used_letters_;
     QGraphicsScene* scene1_;
     QGraphicsScene* scene2_;
+    QGraphicsRectItem* rect11;
+    QGraphicsRectItem* rect12;
+    QGraphicsRectItem* rect21;
+    QGraphicsRectItem* rect22;
     QGridLayout* grid_ = new QGridLayout();
 
     unsigned int rows_ = 1;
@@ -50,7 +58,7 @@ private:
     unsigned int p1_points_ = 0;
     unsigned int p2_points_ = 0;
 
-    const unsigned int CARD_AMOUNT = 4;
+    const unsigned int CARD_AMOUNT = 20;
     const std::string letters = "AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP";
 
     const int CARD_BUTTON_WIDTH = 60;
